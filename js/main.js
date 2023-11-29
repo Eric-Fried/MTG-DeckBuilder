@@ -98,7 +98,6 @@ function getColorSortedCardData() {
   );
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    console.log(xhr.response);
     for (let i = 0; i < xhr.response.cards.length; i++) {
       if (xhr.response.cards[i].imageUrl) {
         const currentRender = renderEntry(xhr.response.cards[i]);
