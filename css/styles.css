@@ -1,0 +1,64 @@
+.title-banner {
+  display: flex;
+  justify-content: center;
+  background-color: #002447;
+  color: white;
+}
+
+.nav-bar {
+  background-color: #2b4d70;
+}
+
+.button-container {
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+  background-color: #f1f4f6;
+}
+
+button {
+  height: 60px;
+  width: 200px;
+  background-color: #d9d9d9;
+  border-color: #d9d9d9;
+  border-radius: 10%;
+}
+
+.card-search-button,
+.deck-builder-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+select {
+  background-color: #d9d9d9;
+}
+
+.column-one-fifth {
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.card-search-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f4f6;
+  padding-top: 8px;
+}

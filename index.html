@@ -1,20 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AJAX Project</title>
-  <link rel="icon" href="images/favicon.ico">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-  <header>
-  </header>
-  <main>
-  </main>
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX Project</title>
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="column-full title-banner">
+            <h1>MTG Card Database</h1>
+          </div>
+        </div>
+        <div class="row nav-bar hidden">
+          <div class="column-one-third">
+            <a href="#">Decks</a>
+
+            <select name="colors" id="colors">
+              <option selected disabled hidden>Colors</option>
+              <option value="red">Red</option>
+              <option value="white">White</option>
+              <option value="black">Black</option>
+              <option value="blue">Blue</option>
+              <option value="green">Green</option>
+            </select>
+
+            <select name="sets" id="sets">
+              <option selected disabled hidden>Sets</option>
+              <option value="red">set 1</option>
+              <option value="white">set 2</option>
+              <option value="black">set 3</option>
+              <option value="blue">set 4</option>
+              <option value="green">set 5</option>
+            </select>
+          </div>
+          <div id="home-button" class="column-one-third">
+            <a href="#">Home</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <div data-view="home">
+          <div class="row button-container">
+            <div class="column-half deck-builder-button">
+              <button>Deck Builder</button>
+            </div>
+            <div class="column-half card-search-button">
+              <button>Card Search</button>
+            </div>
+          </div>
+        </div>
+        <div data-view="card-search">
+          <div class="row card-search-row"></div>
+        </div>
+      </div>
+    </main>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>
