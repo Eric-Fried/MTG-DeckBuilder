@@ -41,10 +41,7 @@ function getCardData() {
   xhr.open('GET', 'https://api.magicthegathering.io/v1/cards');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    console.log(xhr.status);
-    console.log(xhr.response);
     for (let i = 0; i < xhr.response.cards.length; i++) {
-      console.log(xhr.response[i]);
       if (xhr.response.cards[i].imageUrl) {
         const currentRender = renderEntry(xhr.response.cards[i]);
         $cardSearchRow.appendChild(currentRender);
