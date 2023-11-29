@@ -6,13 +6,10 @@ function viewSwap(nameOfView) {
   if (nameOfView === 'home') {
     $dataViewCardSearch.className = 'card-search hidden';
     $dataViewHome.className = 'home';
-    // data.view = nameOfView;
   } else if (nameOfView === 'card-search') {
     $dataViewHome.className = 'home hidden';
     $dataViewCardSearch.className = 'card-search';
     $navBar.className = 'row nav-bar';
-
-    // data.view = nameOfView;
   }
 }
 const $cardSearchButton = document.querySelector('.card-search-button');
@@ -20,8 +17,6 @@ $cardSearchButton.addEventListener('click', handleCardSearchClick);
 function handleCardSearchClick(event) {
   viewSwap('card-search');
   getCardData();
-
-  console.log('running card search click');
 }
 
 function renderEntry(entry) {
