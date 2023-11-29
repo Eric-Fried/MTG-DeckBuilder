@@ -49,10 +49,13 @@ select {
 }
 
 .column-one-fifth {
-  margin-right: 5px;
+  /* margin-right: 5px;
   margin-left: 5px;
   margin-bottom: 5px;
-  margin-top: 5px;
+  margin-top: 5px; */
+  padding: 5px;
+
+  /* flex-basis: calc(100%/5); */
 }
 
 .card-search-row {
@@ -60,5 +63,5 @@ select {
   align-items: center;
   justify-content: center;
   background-color: #f1f4f6;
-  padding-top: 8px;
+  margin-top: 8px;
 }
