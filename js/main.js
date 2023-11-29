@@ -12,11 +12,18 @@ function viewSwap(nameOfView) {
     $navBar.className = 'row nav-bar';
   }
 }
+
 const $cardSearchButton = document.querySelector('.card-search-button');
 $cardSearchButton.addEventListener('click', handleCardSearchClick);
 function handleCardSearchClick(event) {
   viewSwap('card-search');
   getCardData();
+}
+
+const $homeButton = document.querySelector('#home-button');
+$homeButton.addEventListener('click', handleHomeClick);
+function handleHomeClick(event) {
+  viewSwap('home');
 }
 
 function renderEntry(entry) {
