@@ -1,10 +1,12 @@
-body {
-  background-color: #f0f0f0;
-}
-
 .title-banner {
   display: flex;
   justify-content: center;
+  background-color: #002447;
+  color: white;
+}
+
+.nav-bar {
+  background-color: #2b4d70;
 }
 
 .button-container {
@@ -27,7 +29,7 @@ button {
 }
 
 a {
-  color: black;
+  color: white;
   text-decoration: none;
   margin-left: 10px;
   margin-right: 10px;
@@ -41,4 +43,19 @@ img {
 
 select {
   background-color: #d9d9d9;
+}
+
+.column-one-fifth {
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.card-search-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f4f6;
+  padding-top: 8px;
 }
