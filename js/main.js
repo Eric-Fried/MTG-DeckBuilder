@@ -41,6 +41,7 @@ function renderEntry(entry) {
   $columnOneFifth.setAttribute('class', 'column-one-fifth');
   const $img = document.createElement('img');
   $img.setAttribute('src', entry.imageUrl);
+  $img.setAttribute('alt', 'card artwork');
   $img.setAttribute('loading', 'lazy');
   $columnOneFifth.appendChild($img);
 
