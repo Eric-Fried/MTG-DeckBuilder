@@ -49,13 +49,7 @@ select {
 }
 
 .column-one-fifth {
-  /* margin-right: 5px;
-  margin-left: 5px;
-  margin-bottom: 5px;
-  margin-top: 5px; */
   padding: 5px;
-
-  /* flex-basis: calc(100%/5); */
 }
 
 .card-search-row {
