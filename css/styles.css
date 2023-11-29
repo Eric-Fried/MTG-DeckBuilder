@@ -25,3 +25,20 @@ button {
   align-items: center;
   justify-content: center;
 }
+
+a {
+  color: black;
+  text-decoration: none;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+select {
+  background-color: #d9d9d9;
+}
