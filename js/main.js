@@ -81,3 +81,15 @@ function getSetSortedCardData() {
   });
   xhr.send();
 }
+
+function getSets() {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', `https://api.magicthegathering.io/v1/sets`);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    console.log(xhr.response);
+  });
+  xhr.send();
+}
+
+getSets();
