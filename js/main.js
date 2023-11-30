@@ -36,6 +36,15 @@ function handleSetClick(event) {
   getSetSortedCardData();
 }
 
+const $colorsDropDown = document.querySelector('#colors');
+$colorsDropDown.addEventListener('change', handleColorClick);
+function handleColorClick(event) {
+  while ($cardSearchRow.hasChildNodes()) {
+    $cardSearchRow.firstChild.remove();
+  }
+  getColorSortedCardData();
+}
+
 function renderEntry(entry) {
   const $columnOneFifth = document.createElement('div');
   $columnOneFifth.setAttribute('class', 'column-one-fifth');
@@ -68,6 +77,24 @@ function getSetSortedCardData() {
   xhr.open(
     'GET',
     `https://api.magicthegathering.io/v1/cards?set=${event.target.value}`,
+  );
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    for (let i = 0; i < xhr.response.cards.length; i++) {
+      if (xhr.response.cards[i].imageUrl) {
+        const currentRender = renderEntry(xhr.response.cards[i]);
+        $cardSearchRow.appendChild(currentRender);
+      }
+    }
+  });
+  xhr.send();
+}
+
+function getColorSortedCardData() {
+  const xhr = new XMLHttpRequest();
+  xhr.open(
+    'GET',
+    `https://api.magicthegathering.io/v1/cards?colorIdentity=${event.target.value}`,
   );
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
