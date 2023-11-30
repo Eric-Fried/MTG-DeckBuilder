@@ -69,3 +69,17 @@ select {
 #colors {
   width: 75px;
 }
+
+.deck-view-row {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+main {
+  background-color: #f1f4f6;
+  min-height: 100vh;
+}

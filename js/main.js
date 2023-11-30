@@ -1,16 +1,27 @@
 const $dataViewHome = document.querySelector("[data-view='home']");
 const $dataViewCardSearch = document.querySelector("[data-view='card-search']");
+
+const $dataViewDecks = document.querySelector("[data-view='deck-view']");
 const $navBar = document.querySelector('.nav-bar');
 const $cardSearchRow = document.querySelector('.card-search-row');
 function viewSwap(nameOfView) {
   if (nameOfView === 'home') {
     $dataViewCardSearch.className = 'card-search hidden';
     $dataViewHome.className = 'home';
+    $dataViewDecks.classList.add('hidden');
     $navBar.setAttribute('class', 'row nav-bar hidden');
+    $dataViewDecks.classList.add('hidden');
   } else if (nameOfView === 'card-search') {
     $dataViewHome.className = 'home hidden';
     $dataViewCardSearch.className = 'card-search';
     $navBar.setAttribute('class', 'row nav-bar');
+    $dataViewDecks.classList.add('hidden');
+  } else if (nameOfView === 'decks') {
+    $dataViewCardSearch.classList.add('hidden');
+    $dataViewHome.classList.add('hidden');
+    $dataViewDecks.className = 'decks';
+
+    toggleNoEntries();
   }
 }
 
@@ -21,9 +32,20 @@ function handleCardSearchClick(event) {
   getCardData();
 }
 
+const $deckBuilderButton = document.querySelector('.deck-builder-button');
+$deckBuilderButton.addEventListener('click', handleDeckBuildClick);
+function handleDeckBuildClick(event) {
+  viewSwap('decks');
+}
+
 const $homeButton = document.querySelector('#home-button');
 $homeButton.addEventListener('click', handleHomeClick);
 function handleHomeClick(event) {
+  viewSwap('home');
+}
+const $titleText = document.querySelector('.title-text');
+$titleText.addEventListener('click', handleTitleClick);
+function handleTitleClick(event) {
   viewSwap('home');
 }
 
@@ -106,4 +128,13 @@ function getColorSortedCardData() {
     }
   });
   xhr.send();
+}
+
+const $noEntriesMessage = document.getElementById('noDecks');
+function toggleNoEntries() {
+  if (data.decks.length === 0) {
+    $noEntriesMessage.classList.remove('hidden');
+  } else {
+    $noEntriesMessage.classList.add('hidden');
+  }
 }

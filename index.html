@@ -14,7 +14,7 @@
       <div class="container">
         <div class="row">
           <div class="column-full title-banner">
-            <h1>MTG Card Database</h1>
+            <h1 class="title-text">MTG Card Database</h1>
           </div>
         </div>
         <div class="row nav-bar hidden">
@@ -63,6 +63,15 @@
         </div>
         <div data-view="card-search">
           <div class="row card-search-row"></div>
+        </div>
+        <div data-view="deck-view" class="hidden">
+          <div class="row deck-view-row">
+            <p class="hidden" id="noDecks">No decks have been created</p>
+
+            <div class="column-half new-deck-button">
+              <button>Create New Deck</button>
+            </div>
+          </div>
         </div>
       </div>
     </main>
