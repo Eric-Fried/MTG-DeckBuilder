@@ -36,6 +36,7 @@ const $deckBuilderButton = document.querySelector('.deck-builder-button');
 $deckBuilderButton.addEventListener('click', handleDeckBuildClick);
 function handleDeckBuildClick(event) {
   viewSwap('decks');
+  getCardData();
 }
 
 const $homeButton = document.querySelector('#home-button');
@@ -67,16 +68,49 @@ function handleColorClick(event) {
   getColorSortedCardData();
 }
 
+const $newDeckButton = document.querySelector('.new-deck-button');
+$newDeckButton.addEventListener('click', handleNewDeckClick);
+function handleNewDeckClick(event) {
+  const newDeck = {
+    cards: [],
+  };
+
+  newDeck.id = data.nextEntryId;
+  data.nextEntryId++;
+  data.decks.push(newDeck);
+  data.editing = newDeck;
+  viewSwap('card-search');
+}
+
 function renderEntry(entry) {
   const $columnOneFifth = document.createElement('div');
   $columnOneFifth.setAttribute('class', 'column-one-fifth');
   const $img = document.createElement('img');
+  const $pencil = document.createElement('i');
+  $pencil.setAttribute('class', 'fa-solid fa-circle-plus add-icon');
+
   $img.setAttribute('src', entry.imageUrl);
   $img.setAttribute('alt', 'card artwork');
   $img.setAttribute('loading', 'lazy');
   $columnOneFifth.appendChild($img);
+  $columnOneFifth.appendChild($pencil);
+  $columnOneFifth.addEventListener('click', handleAddCLick);
 
   return $columnOneFifth;
+}
+
+function handleAddCLick(event) {
+  if (event.target.tagName === 'I') {
+    const closestDataEntry = event.target.closest('.column-one-fifth');
+
+    const closestDataEntryImg = closestDataEntry.children[0].src;
+
+    for (let i = 0; i < data.decks.length; i++) {
+      if (data.editing.id === data.decks[i].id) {
+        data.editing.cards.push(closestDataEntryImg);
+      }
+    }
+  }
 }
 
 function getCardData() {
