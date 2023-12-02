@@ -1,9 +1,10 @@
 const $dataViewHome = document.querySelector("[data-view='home']");
 const $dataViewCardSearch = document.querySelector("[data-view='card-search']");
-
+const $deckViewRow = document.querySelector('.deck-view-row');
 const $dataViewDecks = document.querySelector("[data-view='deck-view']");
 const $navBar = document.querySelector('.nav-bar');
 const $cardSearchRow = document.querySelector('.card-search-row');
+const $deckForm = document.querySelector('form');
 function viewSwap(nameOfView) {
   if (nameOfView === 'home') {
     $dataViewCardSearch.className = 'card-search hidden';
@@ -37,6 +38,7 @@ $deckBuilderButton.addEventListener('click', handleDeckBuildClick);
 function handleDeckBuildClick(event) {
   viewSwap('decks');
   getCardData();
+  getButtons();
 }
 
 const $homeButton = document.querySelector('#home-button');
@@ -68,10 +70,18 @@ function handleColorClick(event) {
   getColorSortedCardData();
 }
 
+$deckForm.addEventListener('submit', handleNewDeckClick);
 const $newDeckButton = document.querySelector('.new-deck-button');
-$newDeckButton.addEventListener('click', handleNewDeckClick);
+const $deckName = document.querySelector('input');
 function handleNewDeckClick(event) {
+  event.preventDefault();
+  const deckName = $deckName.value;
+  if (deckName === '') {
+    return;
+  }
+
   const newDeck = {
+    name: deckName,
     cards: [],
   };
 
@@ -99,6 +109,34 @@ function renderEntry(entry) {
   return $columnOneFifth;
 }
 
+function renderButtons(entry) {
+  const $columnOneFifth = document.createElement('div');
+  $columnOneFifth.setAttribute('class', 'column-one-fifth');
+  const $deckSelectButton = document.createElement('button');
+  $deckSelectButton.setAttribute('class', 'deck-select-button');
+  $deckSelectButton.textContent = entry.name;
+  $columnOneFifth.appendChild($deckSelectButton);
+  //add click event to $deckSelectButton
+  //get even.target.textContent and store as variable
+  //loop over data.decks
+  //conditional statment to check if variable created on line 121 is equal to
+  //name property of current deck in loop
+  //if true view swap to card search
+  //loop over cards array within data.decks[i]
+  //call renderEntry funntion passing in data.decks.cards[i]
+  //append result of render entry to appropriate section of dom tree
+  //view swap to card search view
+
+  return $columnOneFifth;
+}
+
+function getButtons() {
+  for (let i = 0; i < data.decks.length; i++) {
+    const currentRender = renderButtons(data.decks[i]);
+    //  $deckSelectButton.textContent('Deck')
+    $deckViewRow.prepend(currentRender);
+  }
+}
 function handleAddCLick(event) {
   if (event.target.tagName === 'I') {
     const closestDataEntry = event.target.closest('.column-one-fifth');
