@@ -29,6 +29,9 @@ function viewSwap(nameOfView) {
 const $cardSearchButton = document.querySelector('.card-search-button');
 $cardSearchButton.addEventListener('click', handleCardSearchClick);
 function handleCardSearchClick(event) {
+  while ($cardSearchRow.firstChild) {
+    $cardSearchRow.removeChild($cardSearchRow.firstChild);
+  }
   viewSwap('card-search');
   getCardData();
 }
@@ -109,6 +112,24 @@ function renderEntry(entry) {
   return $columnOneFifth;
 }
 
+function renderDeckViewEntry(entry) {
+  const $columnOneFifth = document.createElement('div');
+  $columnOneFifth.setAttribute('class', 'column-one-fifth');
+  const $img = document.createElement('img');
+  const $pencil = document.createElement('i');
+  $pencil.setAttribute('class', 'fa-solid fa-circle-plus add-icon');
+
+  $img.setAttribute('src', entry);
+  $img.setAttribute('alt', 'card artwork');
+  $img.setAttribute('loading', 'lazy');
+  $columnOneFifth.appendChild($img);
+  $columnOneFifth.appendChild($pencil);
+  $columnOneFifth.addEventListener('click', handleAddCLick);
+
+  console.log(entry);
+  return $columnOneFifth;
+}
+
 function renderButtons(entry) {
   const $columnOneFifth = document.createElement('div');
   $columnOneFifth.setAttribute('class', 'column-one-fifth');
@@ -116,17 +137,11 @@ function renderButtons(entry) {
   $deckSelectButton.setAttribute('class', 'deck-select-button');
   $deckSelectButton.textContent = entry.name;
   $columnOneFifth.appendChild($deckSelectButton);
-  //add click event to $deckSelectButton
-  //get even.target.textContent and store as variable
-  //loop over data.decks
-  //conditional statment to check if variable created on line 121 is equal to
-  //name property of current deck in loop
-  //if true view swap to card search
-  //loop over cards array within data.decks[i]
-  //call renderEntry funntion passing in data.decks.cards[i]
-  //append result of render entry to appropriate section of dom tree
-  //view swap to card search view
 
+  // add click event to $deckSelectButton
+  $deckSelectButton.addEventListener('click', handleDeckSelectClick);
+
+  //
   return $columnOneFifth;
 }
 
@@ -147,6 +162,35 @@ function handleAddCLick(event) {
       if (data.editing.id === data.decks[i].id) {
         data.editing.cards.push(closestDataEntryImg);
       }
+    }
+  }
+}
+
+function handleDeckSelectClick(event) {
+  //get event.target.textContent and store as variable
+  const currentDeckButtonText = event.target.textContent;
+  console.log('currentDeckButtonText:', currentDeckButtonText);
+  console.log('event.target.textcontent:', event.target.textContent);
+  //loop over data.decks
+  for (i = 0; i < data.decks.length; i++) {
+    data.decks[i].name = 'deck' + ' ' + (i + 1);
+    console.log('running for loop');
+    console.log(data.decks[i]);
+    //conditional statment to check if variable created on line 121 is equal to
+    //name property of current deck in loop
+    if (currentDeckButtonText === data.decks[i].name) {
+      //if true view swap to card search
+      while ($cardSearchRow.firstChild) {
+        $cardSearchRow.removeChild($cardSearchRow.firstChild);
+      }
+
+      for (j = 0; j < data.decks[i].cards.length; j++) {
+        const currentRender = renderDeckViewEntry(data.decks[i].cards[j]);
+        $cardSearchRow.appendChild(currentRender);
+        console.log(data.decks[i].cards.length);
+        console.log('running nested for loop');
+      }
+      viewSwap('card-search');
     }
   }
 }

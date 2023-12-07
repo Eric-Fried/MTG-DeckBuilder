@@ -18,3 +18,4 @@ if (jsonData !== null) {
 }
 
 console.log(jsonData);
+console.log('data.decks', data.decks);
