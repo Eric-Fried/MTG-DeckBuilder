@@ -41,6 +41,9 @@ $deckBuilderButton.addEventListener('click', handleDeckBuildClick);
 function handleDeckBuildClick(event) {
   viewSwap('decks');
   getCardData();
+  while ($deckViewRow.firstChild) {
+    $deckViewRow.removeChild($deckViewRow.firstChild);
+  }
   getButtons();
 }
 
@@ -126,7 +129,6 @@ function renderDeckViewEntry(entry) {
   $columnOneFifth.appendChild($pencil);
   $columnOneFifth.addEventListener('click', handleAddCLick);
 
-  console.log(entry);
   return $columnOneFifth;
 }
 
@@ -148,7 +150,7 @@ function renderButtons(entry) {
 function getButtons() {
   for (let i = 0; i < data.decks.length; i++) {
     const currentRender = renderButtons(data.decks[i]);
-    //  $deckSelectButton.textContent('Deck')
+
     $deckViewRow.prepend(currentRender);
   }
 }
@@ -169,13 +171,12 @@ function handleAddCLick(event) {
 function handleDeckSelectClick(event) {
   //get event.target.textContent and store as variable
   const currentDeckButtonText = event.target.textContent;
-  console.log('currentDeckButtonText:', currentDeckButtonText);
-  console.log('event.target.textcontent:', event.target.textContent);
+
   //loop over data.decks
   for (i = 0; i < data.decks.length; i++) {
+    debugger;
     data.decks[i].name = 'deck' + ' ' + (i + 1);
-    console.log('running for loop');
-    console.log(data.decks[i]);
+
     //conditional statment to check if variable created on line 121 is equal to
     //name property of current deck in loop
     if (currentDeckButtonText === data.decks[i].name) {
@@ -187,8 +188,6 @@ function handleDeckSelectClick(event) {
       for (j = 0; j < data.decks[i].cards.length; j++) {
         const currentRender = renderDeckViewEntry(data.decks[i].cards[j]);
         $cardSearchRow.appendChild(currentRender);
-        console.log(data.decks[i].cards.length);
-        console.log('running nested for loop');
       }
       viewSwap('card-search');
     }
