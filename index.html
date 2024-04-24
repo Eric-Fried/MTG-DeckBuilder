@@ -48,6 +48,11 @@
               <option value="MOM">March of the Machine</option>
               <option value="MAT">March of the Machine: The Aftermath</option>
             </select>
+            <input
+              name="search-box"
+              id="search-box"
+              type="search"
+              placeholder="Enter Card Name" />
           </div>
           <div id="home-button" class="column-one-third">
             <a href="#">Home</a>
@@ -71,13 +76,20 @@
           <div class="row card-search-row"></div>
         </div>
         <div data-view="deck-view" class="hidden">
-          <div class="row deck-view-row">
-            <p class="hidden" id="noDecks">No decks have been created</p>
+          <p class="hidden" id="noDecks">No decks have been created</p>
 
-            <div class="column-half new-deck-button">
-              <button class="new-deck-button">Create New Deck</button>
+          <div class="row deck-view-row"></div>
+          <form action="">
+            <div class="row">
+              <div class="column-half new-deck-input">
+                <input type="text" />
+              </div>
+
+              <div class="column-half new-deck-button">
+                <button class="new-deck-button">Create New Deck</button>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </main>
