@@ -83,13 +83,13 @@ console.dir($searchBar);
 
 function handleSearchEntry(event) {
   event.preventDefault();
-  console.log($searchBar.textContent);
+  console.log($searchBar.value);
   while ($cardSearchRow.hasChildNodes()) {
     $cardSearchRow.firstChild.remove();
   }
   getSearchedCardData();
   console.log(event.target);
-  console.log(getSearchedCardData(event.target.textContent));
+  console.log(getSearchedCardData(event.target.value));
 }
 
 $deckForm.addEventListener('submit', handleNewDeckClick);
@@ -265,7 +265,7 @@ function getSearchedCardData() {
   const xhr = new XMLHttpRequest();
   xhr.open(
     'GET',
-    `https://api.magicthegathering.io/v1/cards?name=${event.target.textContent}`,
+    `https://api.magicthegathering.io/v1/cards?name=${event.target.value}`,
   );
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
