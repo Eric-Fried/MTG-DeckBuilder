@@ -76,6 +76,22 @@ function handleColorClick(event) {
   getColorSortedCardData();
 }
 
+const $searchBar = document.querySelector('#search-box');
+$searchBar.addEventListener('search', handleSearchEntry);
+
+console.dir($searchBar);
+
+function handleSearchEntry(event) {
+  event.preventDefault();
+  console.log($searchBar.textContent);
+  while ($cardSearchRow.hasChildNodes()) {
+    $cardSearchRow.firstChild.remove();
+  }
+  getSearchedCardData();
+  console.log(event.target);
+  console.log(getSearchedCardData(event.target.textContent));
+}
+
 $deckForm.addEventListener('submit', handleNewDeckClick);
 const $newDeckButton = document.querySelector('.new-deck-button');
 const $deckName = document.querySelector('input');
@@ -232,6 +248,24 @@ function getColorSortedCardData() {
   xhr.open(
     'GET',
     `https://api.magicthegathering.io/v1/cards?colorIdentity=${event.target.value}`,
+  );
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    for (let i = 0; i < xhr.response.cards.length; i++) {
+      if (xhr.response.cards[i].imageUrl) {
+        const currentRender = renderEntry(xhr.response.cards[i]);
+        $cardSearchRow.appendChild(currentRender);
+      }
+    }
+  });
+  xhr.send();
+}
+
+function getSearchedCardData() {
+  const xhr = new XMLHttpRequest();
+  xhr.open(
+    'GET',
+    `https://api.magicthegathering.io/v1/cards?name=${event.target.textContent}`,
   );
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
