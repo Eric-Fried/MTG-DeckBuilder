@@ -5,6 +5,7 @@ const $dataViewDecks = document.querySelector("[data-view='deck-view']");
 const $navBar = document.querySelector('.nav-bar');
 const $cardSearchRow = document.querySelector('.card-search-row');
 const $deckForm = document.querySelector('form');
+
 function viewSwap(nameOfView) {
   if (nameOfView === 'home') {
     $dataViewCardSearch.className = 'card-search hidden';
@@ -212,6 +213,7 @@ function handleDeckSelectClick(event) {
 
 function getCardData() {
   const xhr = new XMLHttpRequest();
+
   xhr.open('GET', 'https://api.magicthegathering.io/v1/cards');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
@@ -225,12 +227,33 @@ function getCardData() {
   xhr.send();
 }
 
+let cardData = {
+  color: '',
+  set: '',
+  name: '',
+};
+
 function getSetSortedCardData() {
   const xhr = new XMLHttpRequest();
-  xhr.open(
-    'GET',
-    `https://api.magicthegathering.io/v1/cards?set=${event.target.value}`,
-  );
+  cardData.set = event.target.value;
+  console.log(cardData);
+
+  if (cardData.color) {
+    xhr.open(
+      'GET',
+      `https://api.magicthegathering.io/v1/cards?set=${event.target.value}&colorIdentity=${cardData.color}`,
+    );
+  } else if (cardData.name) {
+    xhr.open(
+      'GET',
+      `https://api.magicthegathering.io/v1/cards?set=${event.target.value}&colorIdentity=${cardData.color}&name=${cardData.name}`,
+    );
+  } else {
+    xhr.open(
+      'GET',
+      `https://api.magicthegathering.io/v1/cards?set=${event.target.value}`,
+    );
+  }
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     for (let i = 0; i < xhr.response.cards.length; i++) {
@@ -240,6 +263,7 @@ function getSetSortedCardData() {
       }
     }
   });
+  console.log(xhr);
   xhr.send();
 }
 
@@ -263,6 +287,8 @@ function getColorSortedCardData() {
 
 function getSearchedCardData() {
   const xhr = new XMLHttpRequest();
+  cardData.name = event.target.value;
+
   xhr.open(
     'GET',
     `https://api.magicthegathering.io/v1/cards?name=${event.target.value}`,
