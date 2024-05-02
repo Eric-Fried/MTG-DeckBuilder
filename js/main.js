@@ -237,16 +237,22 @@ function getSetSortedCardData() {
   const xhr = new XMLHttpRequest();
   cardData.set = event.target.value;
   console.log(cardData);
-
+  if (cardData.color && cardData.name) {
+    xhr.open(
+      'GET',
+      `https://api.magicthegathering.io/v1/cards?set=${event.target.value}&colorIdentity=${cardData.color}&name=${cardData.name}`,
+    );
+  }
   if (cardData.color) {
     xhr.open(
       'GET',
       `https://api.magicthegathering.io/v1/cards?set=${event.target.value}&colorIdentity=${cardData.color}`,
     );
-  } else if (cardData.name) {
+  }
+  if (cardData.name) {
     xhr.open(
       'GET',
-      `https://api.magicthegathering.io/v1/cards?set=${event.target.value}&colorIdentity=${cardData.color}&name=${cardData.name}`,
+      `https://api.magicthegathering.io/v1/cards?set=${event.target.value}&name=${cardData.name}`,
     );
   } else {
     xhr.open(
@@ -269,10 +275,33 @@ function getSetSortedCardData() {
 
 function getColorSortedCardData() {
   const xhr = new XMLHttpRequest();
-  xhr.open(
-    'GET',
-    `https://api.magicthegathering.io/v1/cards?colorIdentity=${event.target.value}`,
-  );
+  cardData.color = event.target.value;
+
+  if (cardData.set && cardData.name) {
+    xhr.open(
+      'GET',
+      `https://api.magicthegathering.io/v1/cards?colorIdentity=${event.target.value}&set=${cardData.set}&name=${cardData.name}`,
+    );
+  }
+  if (cardData.set) {
+    xhr.open(
+      'GET',
+      `https://api.magicthegathering.io/v1/cards?colorIdentity=${event.target.value}&set=${cardData.set}`,
+    );
+  }
+
+  if (cardData.name) {
+    xhr.open(
+      'GET',
+      `https://api.magicthegathering.io/v1/cards?colorIdentity=${event.target.value}&name=${cardData.name}`,
+    );
+  } else {
+    xhr.open(
+      'GET',
+      `https://api.magicthegathering.io/v1/cards?set=${event.target.value}`,
+    );
+  }
+
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     for (let i = 0; i < xhr.response.cards.length; i++) {
@@ -282,6 +311,7 @@ function getColorSortedCardData() {
       }
     }
   });
+  console.log(xhr);
   xhr.send();
 }
 
@@ -289,10 +319,31 @@ function getSearchedCardData() {
   const xhr = new XMLHttpRequest();
   cardData.name = event.target.value;
 
-  xhr.open(
-    'GET',
-    `https://api.magicthegathering.io/v1/cards?name=${event.target.value}`,
-  );
+  if (cardData.set && cardData.color) {
+    xhr.open(
+      'GET',
+      `https://api.magicthegathering.io/v1/cards?name=${event.target.value}&set=${cardData.set}&colorIdentity=${cardData.color}`,
+    );
+  }
+  if (cardData.set) {
+    xhr.open(
+      'GET',
+      `https://api.magicthegathering.io/v1/cards?name=${event.target.value}&set=${cardData.set}`,
+    );
+  }
+
+  if (cardData.color) {
+    xhr.open(
+      'GET',
+      `https://api.magicthegathering.io/v1/cards?name=${event.target.value}&colorIdentity=${cardData.name}`,
+    );
+  } else {
+    xhr.open(
+      'GET',
+      `https://api.magicthegathering.io/v1/cards?name=${event.target.value}`,
+    );
+  }
+
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     for (let i = 0; i < xhr.response.cards.length; i++) {
