@@ -281,15 +281,12 @@ function getColorSortedCardData() {
       'GET',
       `https://api.magicthegathering.io/v1/cards?colorIdentity=${event.target.value}&set=${cardData.set}&name=${cardData.name}`,
     );
-  }
-  if (cardData.set) {
+  } else if (cardData.set) {
     xhr.open(
       'GET',
       `https://api.magicthegathering.io/v1/cards?colorIdentity=${event.target.value}&set=${cardData.set}`,
     );
-  }
-
-  if (cardData.name) {
+  } else if (cardData.name) {
     xhr.open(
       'GET',
       `https://api.magicthegathering.io/v1/cards?colorIdentity=${event.target.value}&name=${cardData.name}`,
