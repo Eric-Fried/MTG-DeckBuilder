@@ -321,15 +321,12 @@ function getSearchedCardData() {
       'GET',
       `https://api.magicthegathering.io/v1/cards?name=${event.target.value}&set=${cardData.set}&colorIdentity=${cardData.color}`,
     );
-  }
-  if (cardData.set) {
+  } else if (cardData.set) {
     xhr.open(
       'GET',
       `https://api.magicthegathering.io/v1/cards?name=${event.target.value}&set=${cardData.set}`,
     );
-  }
-
-  if (cardData.color) {
+  } else if (cardData.color) {
     xhr.open(
       'GET',
       `https://api.magicthegathering.io/v1/cards?name=${event.target.value}&colorIdentity=${cardData.color}`,
