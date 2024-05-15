@@ -168,6 +168,9 @@ function renderButtons(entry) {
 
 function getButtons() {
   for (let i = 0; i < data.decks.length; i++) {
+    if (!data.decks[i].name) {
+      data.decks[i].name = 'deck' + ' ' + (i + 1);
+    }
     const currentRender = renderButtons(data.decks[i]);
 
     $deckViewRow.prepend(currentRender);
