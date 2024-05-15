@@ -80,39 +80,46 @@ function handleColorClick(event) {
 const $searchBar = document.querySelector('#search-box');
 $searchBar.addEventListener('search', handleSearchEntry);
 
-console.dir($searchBar);
-
 function handleSearchEntry(event) {
   event.preventDefault();
-  console.log($searchBar.value);
+
   while ($cardSearchRow.hasChildNodes()) {
     $cardSearchRow.firstChild.remove();
   }
   getSearchedCardData();
-  console.log(event.target);
-  console.log(getSearchedCardData(event.target.value));
 }
 
 $deckForm.addEventListener('submit', handleNewDeckClick);
 const $newDeckButton = document.querySelector('.new-deck-button');
-const $deckName = document.querySelector('input');
+const $deckName = document.querySelector('.new-deck-input');
 function handleNewDeckClick(event) {
   event.preventDefault();
+  console.dir($newDeckButton);
+  console.dir($deckName);
   const deckName = $deckName.value;
-  if (deckName === '') {
-    return;
-  }
+  // if (deckName === '') {
+  //   return;
+  // }
 
   const newDeck = {
     name: deckName,
     cards: [],
   };
 
+  // if (!newDeck.name) {
+  //   newDeck.name = 'deck' + ' ' + (i + 1);
+  // }
+
   newDeck.id = data.nextEntryId;
   data.nextEntryId++;
   data.decks.push(newDeck);
   data.editing = newDeck;
+  while ($cardSearchRow.firstChild) {
+    $cardSearchRow.removeChild($cardSearchRow.firstChild);
+  }
+
   viewSwap('card-search');
+  getCardData();
 }
 
 function renderEntry(entry) {
@@ -166,17 +173,21 @@ function renderButtons(entry) {
 
 function getButtons() {
   for (let i = 0; i < data.decks.length; i++) {
+    if (!data.decks[i].name) {
+      data.decks[i].name = 'deck' + ' ' + (i + 1);
+    }
     const currentRender = renderButtons(data.decks[i]);
 
     $deckViewRow.prepend(currentRender);
   }
 }
 function handleAddCLick(event) {
+  // checks if item clicked was a plus icon
   if (event.target.tagName === 'I') {
     const closestDataEntry = event.target.closest('.column-one-fifth');
 
     const closestDataEntryImg = closestDataEntry.children[0].src;
-
+    // adds clicked card to data.editing.cards
     for (let i = 0; i < data.decks.length; i++) {
       if (data.editing.id === data.decks[i].id) {
         data.editing.cards.push(closestDataEntryImg);
@@ -191,8 +202,9 @@ function handleDeckSelectClick(event) {
 
   //loop over data.decks
   for (i = 0; i < data.decks.length; i++) {
-    debugger;
-    data.decks[i].name = 'deck' + ' ' + (i + 1);
+    // if (!data.decks[i].name) {
+    //   data.decks[i].name = 'deck' + ' ' + (i + 1);
+    // }
 
     //conditional statment to check if variable created on line 121 is equal to
     //name property of current deck in loop
@@ -206,6 +218,13 @@ function handleDeckSelectClick(event) {
         const currentRender = renderDeckViewEntry(data.decks[i].cards[j]);
         $cardSearchRow.appendChild(currentRender);
       }
+
+      //reassign data.decks.cards to data.editing.cards
+      data.decks[i].cards = data.editing.cards;
+
+      //reassign data.editing to currently selected deck
+      data.editing = data.decks[i];
+
       viewSwap('card-search');
     }
   }
@@ -236,7 +255,7 @@ let cardData = {
 function getSetSortedCardData() {
   const xhr = new XMLHttpRequest();
   cardData.set = event.target.value;
-  console.log(cardData);
+
   if (cardData.color && cardData.name) {
     xhr.open(
       'GET',
@@ -267,14 +286,13 @@ function getSetSortedCardData() {
       }
     }
   });
-  console.log(xhr);
+
   xhr.send();
 }
 
 function getColorSortedCardData() {
   const xhr = new XMLHttpRequest();
   cardData.color = event.target.value;
-  console.log(cardData);
 
   if (cardData.set && cardData.name) {
     xhr.open(
@@ -307,14 +325,13 @@ function getColorSortedCardData() {
       }
     }
   });
-  console.log(xhr);
+
   xhr.send();
 }
 
 function getSearchedCardData() {
   const xhr = new XMLHttpRequest();
   cardData.name = event.target.value;
-  console.log(cardData);
 
   if (cardData.set && cardData.color) {
     xhr.open(
@@ -347,7 +364,7 @@ function getSearchedCardData() {
       }
     }
   });
-  console.log(xhr);
+
   xhr.send();
 }
 

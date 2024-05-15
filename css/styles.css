@@ -24,6 +24,11 @@ button {
   border-radius: 10%;
 }
 
+.new-deck-container {
+  display: flex;
+  height: 10vh;
+}
+
 .card-search-button,
 .deck-builder-button {
   display: flex;
@@ -80,7 +85,7 @@ select {
 
 .deck-view-row {
   text-align: center;
-  height: 100vh;
+  height: 75vh;
   display: flex;
   align-items: center;
   justify-content: center;
