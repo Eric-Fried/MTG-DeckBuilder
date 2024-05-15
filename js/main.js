@@ -114,7 +114,12 @@ function handleNewDeckClick(event) {
   data.nextEntryId++;
   data.decks.push(newDeck);
   data.editing = newDeck;
+  while ($cardSearchRow.firstChild) {
+    $cardSearchRow.removeChild($cardSearchRow.firstChild);
+  }
+
   viewSwap('card-search');
+  getCardData();
 }
 
 function renderEntry(entry) {
