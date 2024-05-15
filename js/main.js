@@ -106,6 +106,10 @@ function handleNewDeckClick(event) {
     cards: [],
   };
 
+  // if (!newDeck.name) {
+  //   newDeck.name = 'deck' + ' ' + (i + 1);
+  // }
+
   newDeck.id = data.nextEntryId;
   data.nextEntryId++;
   data.decks.push(newDeck);
