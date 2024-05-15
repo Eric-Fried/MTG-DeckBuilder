@@ -197,9 +197,9 @@ function handleDeckSelectClick(event) {
 
   //loop over data.decks
   for (i = 0; i < data.decks.length; i++) {
-    if (!data.decks[i].name) {
-      data.decks[i].name = 'deck' + ' ' + (i + 1);
-    }
+    // if (!data.decks[i].name) {
+    //   data.decks[i].name = 'deck' + ' ' + (i + 1);
+    // }
 
     //conditional statment to check if variable created on line 121 is equal to
     //name property of current deck in loop
